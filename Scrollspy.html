@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollSpy Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100vh;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        nav a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+        }
+        nav a.active {
+            background: #007bff;
+            color: white;
+        }
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        section {
+            height: 100vh;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#section1" class="nav-link">Section 1</a>
+        <a href="#section2" class="nav-link">Section 2</a>
+        <a href="#section3" class="nav-link">Section 3</a>
+    </nav>
+    <div class="content">
+        <section id="section1"> <h2>Section 1</h2> </section>
+        <section id="section2"> <h2>Section 2</h2> </section>
+        <section id="section3"> <h2>Section 3</h2> </section>
+    </div>
+    <script>
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 50) {
+                    current = section.getAttribute("id");
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
